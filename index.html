@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kit Louvor Pronto | Repertório Organizado para Ministério de Louvor</title>
+<meta name="description" content="100 cifras organizadas por momento do culto — Celebração, Adoração, Ceia/Apelo, Ministração e Encerramento — com o Guia dos Padrões para não travar quando a música mudar. Pagamento único, acesso imediato." />
+<meta property="og:title" content="Kit Louvor Pronto | Repertório Organizado para Ministério de Louvor" />
+<meta property="og:description" content="100 cifras organizadas por momento do culto, com o método pra não travar quando a música mudar." />
+<meta property="og:type" content="website" />
+<!-- TROCAR pela URL final do domínio -->
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI.com.br/" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%239C5B1E'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' fill='%23F6F2E9' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+<noscript><style>.reveal, .reveal-stagger > * { opacity: 1 !important; } .hero-visual-frame { opacity: 1 !important; transform: none !important; animation: none !important; } .hero-visual-frame img { animation: none !important; }</style></noscript>
+
+<!--
+  META PIXEL — não configurado ainda (nenhum Pixel ID foi inventado).
+  Quando o ID real existir, descomente e substitua PIXEL_ID_AQUI.
+  Os eventos ClickCTA*, InitiateCheckout e PageView já são disparados
+  por assets/script.js via trackEvent(), que chama window.fbq
+  automaticamente assim que ele existir — nenhuma outra mudança de
+  código é necessária.
+
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'PIXEL_ID_AQUI');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1" /></noscript>
+-->
+</head>
+<body>
+
+<!-- SPRITE DE ÍCONES — definido uma vez, referenciado via <use> nos blocos
+     de confiança para evitar repetir o mesmo SVG várias vezes na página. -->
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" focusable="false">
+  <defs>
+    <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2.5l7.5 3.5v5.2c0 5-3.2 8.6-7.5 10-4.3-1.4-7.5-5-7.5-10V6l7.5-3.5z"/>
+    </symbol>
+    <symbol id="icon-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/>
+    </symbol>
+    <symbol id="icon-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="5.5" width="19" height="13" rx="2"/>
+      <line x1="2.5" y1="10" x2="21.5" y2="10"/>
+    </symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 8.4 8.4 0 0 1-4-1L3 20l1-5.5A8.5 8.5 0 1 1 21 11.5z"/>
+    </symbol>
+    <symbol id="icon-device" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="7" y="2" width="10" height="20" rx="2"/>
+      <line x1="11" y1="18" x2="13" y2="18"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- FAIXA DE LANÇAMENTO — prazo fixo real, configurado em assets/script.js
+     (CONFIG.PROMO.END_DATE). Vazio = a faixa inteira some. -->
+<div id="urgencyBar" class="urgency-bar" role="status" hidden>
+  <div class="container urgency-bar__inner">
+    <div class="urgency-bar__text">
+      <p class="urgency-bar__label" id="urgencyLabel">Oferta especial de lançamento</p>
+      <p class="urgency-bar__sub" id="urgencySub">Plano Completo por R$37 até 23/08 às 23:59</p>
+    </div>
+    <!-- Os dígitos mudam a cada segundo, então ficam fora da árvore de
+         acessibilidade (aria-hidden) para não anunciar a cada tick — o
+         prazo em si já está no texto normal de urgencyLabel/urgencySub. -->
+    <div class="urgency-bar__countdown" id="urgencyCountdown" aria-hidden="true">
+      <div class="cd-unit"><span class="cd-num" id="cdDays">00</span><span class="cd-label">dias</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cdHours">00</span><span class="cd-label">horas</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cdMins">00</span><span class="cd-label">min</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cdSecs">00</span><span class="cd-label">seg</span></div>
+    </div>
+  </div>
+  <p class="urgency-bar__footnote" id="urgencyFootnote">Após esse prazo, esta condição de lançamento será encerrada.</p>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="container hero">
+    <div class="hero__copy">
+      <h1>Um repertório de louvor pronto pra qualquer momento do culto — e o método pra nunca mais travar quando mudarem a música.</h1>
+      <p class="hero__subhead">100 cifras organizadas por Celebração, Adoração, Ceia/Apelo, Ministração e Encerramento — com o Guia dos Padrões pra você acompanhar mesmo quando o repertório muda em cima da hora.</p>
+      <a href="#planos" class="btn btn-primary" data-nav-cta>Quero meu repertório organizado</a>
+      <div class="trust-bar trust-bar--3">
+        <div class="trust-bar__item"><svg aria-hidden="true"><use href="#icon-shield"></use></svg>Garantia de 7 dias</div>
+        <div class="trust-bar__item"><svg aria-hidden="true"><use href="#icon-bolt"></use></svg>Acesso imediato</div>
+        <div class="trust-bar__item"><svg aria-hidden="true"><use href="#icon-card"></use></svg>Pagamento único</div>
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero-visual-frame">
+        <img src="assets/img/hero-kit-destaque.webp" alt="Kit Louvor Pronto: Cifrário e materiais de apoio, com páginas reais abertas em tablet e celular" width="1200" height="675" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- DOR -->
+  <section class="section section--surface reveal">
+    <div class="container">
+      <h2 class="section-title">Você já passou por isso.</h2>
+      <p class="dor-lead">O problema não é não saber tocar. É travar mesmo sabendo — porque a cifra que você tem está solta, sem organização, sem indicar o momento do culto.</p>
+      <div class="dor-list" id="dorList"></div>
+      <p class="prose">E aí vem aquela sensação — mão no braço do violão, olhando pros outros músicos tentando adivinhar o próximo acorde, torcendo pra ninguém perceber que você travou. Não é falta de talento.</p>
+    </div>
+  </section>
+
+  <!-- MARQUEE — vitrine em movimento com páginas reais do material -->
+  <section class="marquee-section reveal">
+    <div class="marquee-section__head">
+      <p class="marquee-section__title">100 cifras. Organizadas. Prontas.</p>
+      <p class="marquee-section__sub">Uma amostra real do que tem dentro do Cifrário.</p>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__row" id="marqueeRow1"></div>
+      <div class="marquee__row" id="marqueeRow2"></div>
+    </div>
+  </section>
+
+  <!-- NOTA INVISÍVEL -->
+  <section class="section section--dark nota-section reveal">
+    <svg class="nota-deco" viewBox="0 0 140 140" fill="none" aria-hidden="true">
+      <line x1="0" y1="20" x2="140" y2="20" stroke-width="1"/>
+      <line x1="0" y1="36" x2="140" y2="36" stroke-width="1"/>
+      <line x1="0" y1="52" x2="140" y2="52" stroke-width="1"/>
+      <line x1="0" y1="68" x2="140" y2="68" stroke-width="1"/>
+      <line x1="0" y1="84" x2="140" y2="84" stroke-width="1"/>
+      <circle class="nota-deco__note" cx="30" cy="84" r="7" stroke="none"/>
+      <line x1="37" y1="84" x2="37" y2="30" stroke-width="1.5"/>
+      <circle class="nota-deco__note" cx="78" cy="68" r="7" stroke="none"/>
+      <line x1="85" y1="68" x2="85" y2="14" stroke-width="1.5"/>
+    </svg>
+    <div class="container container--tight">
+      <p class="eyebrow eyebrow--gold">A nota invisível</p>
+      <p class="nota__lead">Teve culto que eu subi sem saber direito o que ia tocar. A música mudou, o tom não bateu com o que eu tinha estudado, e eu fiz o que dava pra fazer: deixei a mão no braço do violão, fingindo que estava acompanhando. <strong>A nota invisível.</strong></p>
+      <p class="nota__body">Ninguém do lado percebeu — mas eu sabia. E toda vez que eu subia sem repertório organizado, a chance de acontecer de novo estava lá.</p>
+      <p class="nota__body">O Kit Louvor Pronto nasceu disso: não de uma teoria sobre como ensinar violão, mas da necessidade de ter, na mão, um repertório organizado do jeito que o culto realmente acontece — e de entender o suficiente de padrão harmônico pra não travar quando a música mudasse.</p>
+    </div>
+  </section>
+
+  <!-- MECANISMO -->
+  <section class="section reveal">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center">Dois mecanismos, um repertório que funciona</h2>
+      <div class="mech-grid">
+        <div class="mech-card">
+          <img class="mech-card__thumb" src="assets/img/indice-cifrario.webp" alt="" aria-hidden="true" loading="lazy">
+          <p class="mech-card__num">01</p>
+          <h3 class="mech-card__title">Curadoria por Momento do Culto</h3>
+          <p class="mech-card__desc">As 100 cifras não estão em ordem alfabética nem por artista. Estão separadas em Celebração, Adoração, Ceia/Apelo, Ministração e Encerramento — a mesma lógica que o culto segue.</p>
+        </div>
+        <div class="mech-card">
+          <img class="mech-card__thumb" src="assets/img/guia-padroes-cover.webp" alt="" aria-hidden="true" loading="lazy">
+          <p class="mech-card__num">02</p>
+          <h3 class="mech-card__title">Guia dos Padrões</h3>
+          <p class="mech-card__desc">A maior parte do repertório de louvor gira em torno de poucos acordes, em progressões que se repetem. O Guia ensina a reconhecer essas progressões, pra você ter uma referência quando a música mudar sem aviso.</p>
+        </div>
+      </div>
+      <div class="mech-formula">
+        <span class="mech-formula__term">Organização</span>
+        <span class="mech-formula__op">+</span>
+        <span class="mech-formula__term">Reconhecimento de Padrões</span>
+        <span class="mech-formula__op">=</span>
+        <span class="mech-formula__result">Mais preparo para o culto</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTEXTO DE USO — músico tocando no culto com o método em mãos -->
+  <section class="context-section reveal">
+    <div class="context-frame">
+      <img src="assets/img/contexto-culto.webp" alt="Músico tocando violão no culto, acompanhando pelo Kit Louvor Pronto aberto no tablet" width="1600" height="1067" loading="lazy">
+    </div>
+  </section>
+
+  <!-- O QUE TEM DENTRO -->
+  <section class="section section--surface reveal">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center">O que tem dentro do Cifrário</h2>
+      <div class="features-visual">
+        <img src="assets/img/cifrario-conteudo.webp" alt="Cifrário por Momento: 100 músicas organizadas por parte do culto, com tom, acordes, levada e diagramas em cada página" width="1300" height="867" loading="lazy">
+      </div>
+      <div class="features-layout__list" id="featuresList"></div>
+    </div>
+  </section>
+
+  <!-- PREVIEW DETALHADO -->
+  <section class="section reveal">
+    <div class="container">
+      <h2 class="section-title" style="margin-bottom:8px">Páginas reais do material</h2>
+      <p class="preview-intro">Sem depoimento inventado. O produto fala por si — toque em qualquer página para ampliar.</p>
+      <p class="preview-hint" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Arraste para o lado para ver mais páginas
+      </p>
+      <div class="preview-carousel">
+        <div class="preview-grid" id="previewGrid"></div>
+      </div>
+      <div class="mid-cta">
+        <a href="#planos" id="cta-intermediario" class="btn btn-primary" data-nav-cta="ClickCTAIntermediario">Quero acessar o Kit Louvor Pronto</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BÔNUS -->
+  <section class="section section--surface reveal">
+    <div class="container">
+      <h2 class="section-title">Bônus inclusos no Plano Completo</h2>
+      <div class="bonus-grid" id="bonusGrid"></div>
+    </div>
+  </section>
+
+  <!-- STACK DE VALOR -->
+  <section class="section reveal">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center;font-size:clamp(22px,3.2vw,28px)">O que você recebe</h2>
+      <div class="stack-layout">
+        <div class="stack-layout__box">
+          <div class="stack-box">
+            <div id="stackList"></div>
+            <div class="stack-total">
+              <span>Valor total dos materiais</span>
+              <span class="stack-total__value">R$242</span>
+            </div>
+          </div>
+        </div>
+        <div class="stack-layout__art">
+          <img src="assets/img/hero-kit-destaque.webp" alt="Kit Louvor Pronto: Cifrário e materiais de apoio, com páginas reais abertas em tablet e celular" width="1200" height="675" loading="lazy">
+        </div>
+      </div>
+      <h2 class="stack-transition">Escolha como você quer começar</h2>
+    </div>
+  </section>
+
+  <!-- BLOCO DE CONFIANÇA — reforça segurança antes da decisão de preço -->
+  <section class="section section--tight trust-badges-section reveal">
+    <div class="container">
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <div class="trust-badge__icon"><svg width="20" height="20" aria-hidden="true"><use href="#icon-shield"></use></svg></div>
+          <p class="trust-badge__title">Garantia de 7 dias</p>
+          <p class="trust-badge__desc">Teste o material com tranquilidade.</p>
+        </div>
+        <div class="trust-badge">
+          <div class="trust-badge__icon"><svg width="20" height="20" aria-hidden="true"><use href="#icon-bolt"></use></svg></div>
+          <p class="trust-badge__title">Acesso imediato</p>
+          <p class="trust-badge__desc">Receba o material após a confirmação da compra.</p>
+        </div>
+        <div class="trust-badge">
+          <div class="trust-badge__icon"><svg width="20" height="20" aria-hidden="true"><use href="#icon-card"></use></svg></div>
+          <p class="trust-badge__title">Pagamento único</p>
+          <p class="trust-badge__desc">Sem mensalidade ou cobrança recorrente.</p>
+        </div>
+        <div class="trust-badge">
+          <div class="trust-badge__icon"><svg width="20" height="20" aria-hidden="true"><use href="#icon-device"></use></svg></div>
+          <p class="trust-badge__title">Acesso digital</p>
+          <p class="trust-badge__desc">Consulte o material pelo celular, tablet ou computador.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section id="planos" class="container reveal" style="max-width:1000px;padding-bottom:clamp(40px,6vw,72px)">
+    <div class="plans-grid">
+      <div class="plan-card plan-card--basic">
+        <h3 class="plan-name">Plano Básico</h3>
+        <p class="plan-was">Valor do material: R$67</p>
+        <p class="plan-price">R$19,90</p>
+        <div class="plan-features">
+          <div>✓ Mapa de Repertório</div>
+          <div>✓ Cifrário completo — 100 músicas</div>
+          <div>✓ Protocolo dos 15 Minutos</div>
+        </div>
+        <a href="#" class="btn btn-dark btn-block" data-cta="basico">Quero o Plano Básico</a>
+        <p class="microcopy microcopy--center">Pagamento único · Acesso imediato · Garantia de 7 dias</p>
+      </div>
+
+      <div class="plan-card plan-card--complete">
+        <span class="plan-badge">Melhor custo-benefício</span>
+        <h3 class="plan-name">Plano Completo</h3>
+        <p class="plan-was">Valor dos materiais: R$242</p>
+        <p class="plan-price">R$37</p>
+        <div class="plan-thumbs" aria-hidden="true">
+          <img src="assets/img/mockup-guia-padroes.webp" alt="" loading="lazy">
+          <img src="assets/img/mockup-guia-transposicao.webp" alt="" loading="lazy">
+          <img src="assets/img/mockup-checklist-altar.webp" alt="" loading="lazy">
+          <img src="assets/img/mockup-cifrario-imprimivel.webp" alt="" loading="lazy">
+          <img src="assets/img/mockup-cifrario-letras.webp" alt="" loading="lazy">
+        </div>
+        <div class="plan-features">
+          <div>✓ Tudo do Plano Básico, mais:</div>
+          <div>✓ Guia dos Padrões</div>
+          <div>✓ Guia de Transposição</div>
+          <div>✓ Checklists do Altar</div>
+          <div>✓ Cifrário Imprimível</div>
+          <div>✓ Cifrário com Letras Completas</div>
+          <div>✓ Entrega também por WhatsApp</div>
+        </div>
+        <a href="#" class="btn btn-gold btn-block" data-cta="completo">Quero o Plano Completo</a>
+        <p class="microcopy microcopy--center microcopy--on-dark">Pagamento único · Acesso imediato · Garantia de 7 dias</p>
+      </div>
+    </div>
+
+    <div class="value-note">
+      <p><strong>Por apenas R$17,10 a mais, você leva o método completo.</strong> O Básico organiza seu repertório. O Completo também prepara você para quando mudarem a música, o tom ou o planejamento em cima da hora.</p>
+    </div>
+  </section>
+
+  <!-- GARANTIA -->
+  <section class="section section--tight section--surface reveal">
+    <div class="container container--tight guarantee">
+      <div class="guarantee__badge" aria-hidden="true">7</div>
+      <h2 class="guarantee__title">Garantia de 7 dias</h2>
+      <p class="guarantee__body">Você tem 7 dias, a partir da compra, pra acessar o material, usar no seu culto e conferir se ele resolve o que você precisa. Se não for pra você, é só solicitar o reembolso dentro desse prazo.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section reveal">
+    <div class="container container--narrow">
+      <h2 class="section-title">Perguntas frequentes</h2>
+      <div id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section section--dark reveal">
+    <div class="container container--tight cta-final">
+      <p class="cta-final__headline">Seu repertório de louvor, organizado do jeito que o culto acontece — com o método pra você nunca mais travar quando a música mudar.</p>
+      <div class="cta-final__buttons">
+        <a href="#" class="btn btn-light" data-cta="basico">Quero o Plano Básico — R$19,90</a>
+        <a href="#" class="btn btn-gold" data-cta="completo">Quero o Plano Completo — R$37</a>
+      </div>
+      <div class="trust-bar trust-bar--on-dark" style="margin-left:auto;margin-right:auto">
+        <div class="trust-bar__item"><svg aria-hidden="true"><use href="#icon-shield"></use></svg>Garantia 7 dias</div>
+        <div class="trust-bar__item"><svg aria-hidden="true"><use href="#icon-bolt"></use></svg>Acesso imediato</div>
+        <div class="trust-bar__item"><svg aria-hidden="true"><use href="#icon-card"></use></svg>Pagamento único</div>
+        <div class="trust-bar__item"><svg aria-hidden="true"><use href="#icon-device"></use></svg>Acesso digital</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container site-footer__row">
+    <span class="site-footer__brand">Kit Louvor Pronto</span>
+    <div class="site-footer__links">
+      <!-- TROCAR pelos links reais quando as páginas existirem -->
+      <a href="#">Termos de Uso</a>
+      <a href="#">Política de Privacidade</a>
+      <a href="mailto:CONTATO_A_CONFIGURAR@dominio.com">Contato / Suporte</a>
+    </div>
+  </div>
+  <div class="container site-footer__legal">© 2026 Kit Louvor Pronto. Todos os direitos reservados. Uso pessoal do material — não deve ser reproduzido ou redistribuído.</div>
+</footer>
+
+<!-- LIGHTBOX — usado pela seção "Páginas reais do material" -->
+<div id="lightbox" class="lightbox-overlay" hidden>
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Página ampliada do material">
+    <button type="button" class="modal-close" data-close-modal aria-label="Fechar">×</button>
+    <div class="lightbox__img-wrap">
+      <img id="lightboxImg" src="" alt="">
+    </div>
+    <p class="lightbox__caption" id="lightboxCaption"></p>
+  </div>
+</div>
+
+<!-- SONGS MODAL -->
+<div id="songsModal" class="modal-overlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-label="As 100 músicas do Cifrário">
+    <button type="button" class="modal-close" data-close-modal aria-label="Fechar">×</button>
+    <p class="modal-title" style="margin-bottom:4px;font-size:22px">As 100 músicas do Cifrário</p>
+    <p class="songs-modal-intro">Organizadas por momento do culto</p>
+    <div id="songsCategories"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script src="assets/script.js" defer></script>
+</body>
+</html>
