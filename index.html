@@ -18,25 +18,26 @@
 <link rel="stylesheet" href="assets/styles.css" />
 <noscript><style>.reveal, .reveal-stagger > * { opacity: 1 !important; } .hero-visual-frame { opacity: 1 !important; transform: none !important; animation: none !important; } .hero-visual-frame img { animation: none !important; }</style></noscript>
 
-<!--
-  META PIXEL — não configurado ainda (nenhum Pixel ID foi inventado).
-  Quando o ID real existir, descomente e substitua PIXEL_ID_AQUI.
-  Os eventos ClickCTA*, InitiateCheckout e PageView já são disparados
-  por assets/script.js via trackEvent(), que chama window.fbq
-  automaticamente assim que ele existir — nenhuma outra mudança de
-  código é necessária.
-
+<!-- Meta Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'PIXEL_ID_AQUI');
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '931278250016829');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1" /></noscript>
--->
+src="https://www.facebook.com/tr?id=931278250016829&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- fbq('track','PageView') do código-base foi omitido de propósito: assets/script.js
+     já dispara o evento PageView via trackEvent() assim que window.fbq existir
+     (ver final de document.addEventListener('DOMContentLoaded', ...) em assets/script.js).
+     Incluir as duas chamadas duplicaria o PageView a cada carregamento de página. -->
 </head>
 <body>
 
