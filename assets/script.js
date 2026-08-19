@@ -13,13 +13,6 @@ const CONFIG = {
     completo: 'https://pay.kiwify.com.br/HPfCVky'
   },
 
-  // Payload do evento InitiateCheckout (Meta Pixel) por plano — usado
-  // apenas nos botões que realmente levam a um checkout da Kiwify.
-  CHECKOUT_META: {
-    basico: { value: 19.90, currency: 'BRL', content_name: 'Kit Louvor Pronto - Plano Básico' },
-    completo: { value: 37.00, currency: 'BRL', content_name: 'Kit Louvor Pronto - Plano Completo' }
-  },
-
   // Faixa de lançamento — prazo FIXO e real: 23/08/2026 às 23:59, horário
   // de Brasília. O offset "-03:00" fica embutido na própria string ISO, por
   // isso o contador dá o mesmo resultado pra qualquer visitante, em
@@ -41,9 +34,10 @@ const CONFIG = {
    1. Adicione o base code do Meta Pixel no <head> de index.html.
    2. trackEvent() abaixo já chama window.fbq quando ele existir.
    Eventos disparados: PageView, ClickHeaderCTA, ClickCTABasico,
-   ClickCTACompleto, InitiateCheckout. Purchase deve ser disparado na
-   página de obrigado/confirmação da plataforma de pagamento, fora deste
-   arquivo.
+   ClickCTACompleto. InitiateCheckout é enviado pela própria Kiwify a
+   partir do Pixel configurado no checkout — não é disparado aqui. Purchase
+   também deve ser disparado na página de obrigado/confirmação da
+   plataforma de pagamento, fora deste arquivo.
    ========================================================================== */
 function trackEvent(name, payload) {
   if (typeof window.fbq === 'function') {
@@ -344,7 +338,6 @@ function handleCta(e, plan) {
   e.preventDefault();
   const url = CONFIG.CHECKOUT_URLS[plan];
   trackEvent(plan === 'basico' ? 'ClickCTABasico' : 'ClickCTACompleto');
-  trackEvent('InitiateCheckout', CONFIG.CHECKOUT_META[plan]);
   if (!url || url.indexOf('CHECKOUT_') === 0) {
     showToast('Link de checkout ainda não configurado — defina CONFIG.CHECKOUT_URLS.' + plan + ' em assets/script.js.');
     return;
