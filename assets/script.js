@@ -13,6 +13,13 @@ const CONFIG = {
     completo: 'https://pay.kiwify.com.br/HPfCVky'
   },
 
+  // Payload do evento InitiateCheckout (Meta Pixel) por plano — usado
+  // apenas nos botões que realmente levam a um checkout da Kiwify.
+  CHECKOUT_META: {
+    basico: { value: 19.90, currency: 'BRL', content_name: 'Kit Louvor Pronto - Plano Básico' },
+    completo: { value: 37.00, currency: 'BRL', content_name: 'Kit Louvor Pronto - Plano Completo' }
+  },
+
   // Faixa de lançamento — prazo FIXO e real: 23/08/2026 às 23:59, horário
   // de Brasília. O offset "-03:00" fica embutido na própria string ISO, por
   // isso o contador dá o mesmo resultado pra qualquer visitante, em
@@ -337,7 +344,7 @@ function handleCta(e, plan) {
   e.preventDefault();
   const url = CONFIG.CHECKOUT_URLS[plan];
   trackEvent(plan === 'basico' ? 'ClickCTABasico' : 'ClickCTACompleto');
-  trackEvent('InitiateCheckout', { plan });
+  trackEvent('InitiateCheckout', CONFIG.CHECKOUT_META[plan]);
   if (!url || url.indexOf('CHECKOUT_') === 0) {
     showToast('Link de checkout ainda não configurado — defina CONFIG.CHECKOUT_URLS.' + plan + ' em assets/script.js.');
     return;
