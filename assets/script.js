@@ -4,12 +4,13 @@
    CONFIG
    ========================================================================== */
 const CONFIG = {
-  // Trocar os links de checkout aqui quando estiverem prontos. Enquanto o
-  // valor começar com "CHECKOUT_", o clique mostra um aviso (toast) em vez
-  // de navegar, para nunca levar a um link quebrado.
+  // Checkouts reais (Kiwify). Enquanto o valor começar com "CHECKOUT_", o
+  // clique mostra um aviso (toast) em vez de navegar, para nunca levar a
+  // um link quebrado — mantido como salvaguarda caso um dos dois seja
+  // apagado por engano no futuro.
   CHECKOUT_URLS: {
-    basico: 'CHECKOUT_BASICO',
-    completo: 'CHECKOUT_COMPLETO'
+    basico: 'https://pay.kiwify.com.br/BMOi75a',
+    completo: 'https://pay.kiwify.com.br/HPfCVky'
   },
 
   // Faixa de lançamento — prazo FIXO e real: 23/08/2026 às 23:59, horário
