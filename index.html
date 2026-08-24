@@ -63,31 +63,48 @@ src="https://www.facebook.com/tr?id=1747249773180770&ev=PageView&noscript=1"
       <rect x="7" y="2" width="10" height="20" rx="2"/>
       <line x1="11" y1="18" x2="13" y2="18"/>
     </symbol>
+    <symbol id="icon-star" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.7l2.9 6 6.6.7-4.9 4.5 1.3 6.5L12 16.9l-5.9 3.5 1.3-6.5-4.9-4.5 6.6-.7z"/>
+    </symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="8.5" r="4"/>
+      <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </symbol>
   </defs>
 </svg>
 
-<!-- FAIXA DE LANÇAMENTO — prazo fixo real, configurado em assets/script.js
-     (CONFIG.PROMO.END_DATE). Vazio = a faixa inteira some. -->
-<div id="urgencyBar" class="urgency-bar" role="status" hidden>
+<!-- FAIXA DE URGÊNCIA — texto fixo, sem countdown. -->
+<div class="urgency-bar">
   <div class="container urgency-bar__inner">
-    <div class="urgency-bar__text">
-      <p class="urgency-bar__label" id="urgencyLabel">Oferta especial de lançamento</p>
-      <p class="urgency-bar__sub" id="urgencySub">Plano Completo por R$37 até 23/08 às 23:59</p>
-    </div>
-    <!-- Os dígitos mudam a cada segundo, então ficam fora da árvore de
-         acessibilidade (aria-hidden) para não anunciar a cada tick — o
-         prazo em si já está no texto normal de urgencyLabel/urgencySub. -->
-    <div class="urgency-bar__countdown" id="urgencyCountdown" aria-hidden="true">
-      <div class="cd-unit"><span class="cd-num" id="cdDays">00</span><span class="cd-label">dias</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-num" id="cdHours">00</span><span class="cd-label">horas</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-num" id="cdMins">00</span><span class="cd-label">min</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-num" id="cdSecs">00</span><span class="cd-label">seg</span></div>
-    </div>
+    <p class="urgency-bar__label">🔥 OFERTA ESPECIAL POR TEMPO LIMITADO</p>
   </div>
-  <p class="urgency-bar__footnote" id="urgencyFootnote">Após esse prazo, esta condição de lançamento será encerrada.</p>
+</div>
+
+<!-- PROVA SOCIAL — placeholders editáveis, nenhum dado real ainda.
+     Antes de publicar: (1) troque o "X" pelo número real de alunos/
+     compradores; (2) confirme se 4,9/5 é a nota real ou ajuste; (3) os 5
+     avatares são ícones neutros (não fotos de clientes) — troque por fotos
+     reais de alunos quando/se houver autorização de uso de imagem. -->
+<div class="social-proof">
+  <div class="container social-proof__inner">
+    <div class="social-proof__row">
+      <div class="social-proof__avatars" aria-hidden="true">
+        <span class="sp-avatar"><svg><use href="#icon-user"></use></svg></span>
+        <span class="sp-avatar"><svg><use href="#icon-user"></use></svg></span>
+        <span class="sp-avatar"><svg><use href="#icon-user"></use></svg></span>
+        <span class="sp-avatar"><svg><use href="#icon-user"></use></svg></span>
+        <span class="sp-avatar"><svg><use href="#icon-user"></use></svg></span>
+      </div>
+      <p class="social-proof__count"><strong>+X</strong> alunos</p>
+    </div>
+    <p class="social-proof__rating">
+      <span class="sp-stars" aria-hidden="true">
+        <svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg>
+      </span>
+      4,9/5 de avaliação
+    </p>
+    <p class="social-proof__sub">100 cifras organizadas por momento do culto</p>
+  </div>
 </div>
 
 <main>

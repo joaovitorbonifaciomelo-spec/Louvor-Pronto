@@ -11,20 +11,6 @@ const CONFIG = {
   CHECKOUT_URLS: {
     basico: 'https://pay.kiwify.com.br/BMOi75a',
     completo: 'https://pay.kiwify.com.br/HPfCVky'
-  },
-
-  // Faixa de lançamento — prazo FIXO e real: 23/08/2026 às 23:59, horário
-  // de Brasília. O offset "-03:00" fica embutido na própria string ISO, por
-  // isso o contador dá o mesmo resultado pra qualquer visitante, em
-  // qualquer fuso — não depende do relógio/timezone do computador dele.
-  // Brasil não usa mais horário de verão desde 2019, então -03:00 é estável
-  // o ano inteiro. Para desativar a faixa inteira, deixe END_DATE = ''.
-  PROMO: {
-    END_DATE: '2026-08-23T23:59:00-03:00',
-    LABEL_MAIN: 'Oferta especial de lançamento',
-    LABEL_SUB: 'Plano Completo por R$37 até 23/08 às 23:59',
-    LABEL_URGENT: 'Últimas horas da oferta de lançamento',
-    LABEL_EXPIRED: 'Esta condição especial de lançamento foi encerrada.'
   }
 };
 
@@ -363,75 +349,6 @@ function setupRevealOnScroll() {
 }
 
 /* ==========================================================================
-   Faixa de lançamento — prazo fixo real (ver CONFIG.PROMO no topo).
-   O deadline é um instante absoluto (offset -03:00 embutido na string ISO),
-   então todo visitante — em qualquer fuso — vê a mesma contagem, e ela
-   nunca reinicia ao atualizar a página. Passado o prazo, a faixa continua
-   visível mas só com a mensagem neutra — sem preço, sem contador, sem
-   reiniciar promoção nenhuma sozinha.
-   ========================================================================== */
-let promoTimer = null;
-const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-
-function setupUrgencyBar() {
-  const endValue = CONFIG.PROMO.END_DATE;
-  if (!endValue) return;
-
-  const end = new Date(endValue);
-  if (isNaN(end.getTime())) return;
-
-  const bar = document.getElementById('urgencyBar');
-  const labelEl = document.getElementById('urgencyLabel');
-  const subEl = document.getElementById('urgencySub');
-  const footnoteEl = document.getElementById('urgencyFootnote');
-  const countdownEl = document.getElementById('urgencyCountdown');
-  const dEl = document.getElementById('cdDays');
-  const hEl = document.getElementById('cdHours');
-  const mEl = document.getElementById('cdMins');
-  const sEl = document.getElementById('cdSecs');
-
-  function renderExpired() {
-    // A faixa continua visível, mas só com a mensagem neutra — sem preço,
-    // sem contador, sem qualquer texto vinculado à condição de lançamento.
-    bar.hidden = false;
-    bar.classList.add('urgency-bar--expired');
-    bar.classList.remove('urgency-bar--urgent');
-    labelEl.textContent = CONFIG.PROMO.LABEL_EXPIRED;
-    subEl.hidden = true;
-    footnoteEl.hidden = true;
-    countdownEl.hidden = true;
-  }
-
-  function tick() {
-    const diff = end.getTime() - Date.now();
-    if (diff <= 0) {
-      renderExpired();
-      clearInterval(promoTimer);
-      return;
-    }
-
-    const totalSeconds = Math.floor(diff / 1000);
-    dEl.textContent = String(Math.floor(totalSeconds / 86400)).padStart(2, '0');
-    hEl.textContent = String(Math.floor((totalSeconds % 86400) / 3600)).padStart(2, '0');
-    mEl.textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-    sEl.textContent = String(totalSeconds % 60).padStart(2, '0');
-
-    const isUrgent = diff < ONE_DAY_MS;
-    bar.classList.toggle('urgency-bar--urgent', isUrgent);
-    labelEl.textContent = isUrgent ? CONFIG.PROMO.LABEL_URGENT : CONFIG.PROMO.LABEL_MAIN;
-  }
-
-  bar.hidden = false;
-  subEl.hidden = false;
-  footnoteEl.hidden = false;
-  countdownEl.hidden = false;
-  subEl.textContent = CONFIG.PROMO.LABEL_SUB;
-  footnoteEl.textContent = 'Após esse prazo, esta condição de lançamento será encerrada.';
-  tick();
-  promoTimer = setInterval(tick, 1000);
-}
-
-/* ==========================================================================
    Wire-up
    ========================================================================== */
 function safe(fn) {
@@ -439,7 +356,6 @@ function safe(fn) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  safe(setupUrgencyBar);
   safe(renderDor);
   safe(renderFeatures);
   safe(renderBonuses);
