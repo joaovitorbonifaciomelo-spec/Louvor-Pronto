@@ -787,96 +787,79 @@ h2.section-title {
 .songs-category__list li { font-size: 13.5px; color: var(--text-soft); padding: 3px 0; }
 .modal-title { margin: 0 0 16px; font-family: var(--font-serif); font-weight: 700; font-size: 20px; }
 
-/* ---- Bônus ---- */
-/* auto-fit at this minmax fits 4 equal cards on desktop, 2x2 on tablet,
-   1 column on mobile — no card is ever singled out by the grid itself. */
-/* 5 bônus: flexbox (not grid) so a partial last row centers itself
-   instead of stretching or leaving one card stranded on its own line.
-   Mobile: strictly 1 per row. Desktop: wraps naturally into 3 + 2,
-   both rows centered, each card a consistent width. */
-.bonus-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.bonus-grid .bonus-card { width: 100%; }
-@media (min-width: 640px) {
-  .bonus-grid {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 22px;
-  }
-  .bonus-grid .bonus-card { flex: 0 1 320px; width: auto; }
-}
-.bonus-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: box-shadow var(--dur-fast) ease, transform var(--dur-fast) ease;
-}
-.bonus-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-.bonus-card__img-wrap { aspect-ratio: 3 / 2; overflow: hidden; border-bottom: 1px solid var(--border); background: var(--surface); }
-.bonus-card__img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.bonus-card__body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-.bonus-card__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-.bonus-card__title { margin: 0; font-family: var(--font-serif); font-weight: 700; font-size: 17px; }
-.bonus-card__value { font-size: 12px; font-weight: 700; color: var(--wine); white-space: nowrap; }
-.bonus-card__what { margin: 0; font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
-.bonus-card__benefit { margin: 0; font-size: 13.5px; line-height: 1.5; }
-.bonus-card__objection { margin: 0; font-size: 12.5px; color: var(--text-faint); line-height: 1.5; font-style: italic; }
-
-/* Mobile: 5 bônus cards is a lot of scroll — compact each one. The italic
-   objection line goes (redundant with "what"+"benefit" right above it),
-   padding tightens, image gets shorter. Desktop keeps the fuller cards. */
-@media (max-width: 640px) {
-  .bonus-card__objection { display: none; }
-  .bonus-card__img-wrap { aspect-ratio: 16 / 7; }
-  .bonus-card__body { padding: 14px 16px 16px; gap: 5px; }
-  .bonus-card__title { font-size: 16px; }
-  .bonus-card__what { margin-bottom: 2px; }
-}
-
-/* ---- Stack de valor ---- */
-.stack-layout { display: flex; flex-wrap: wrap-reverse; gap: 28px; align-items: center; justify-content: center; }
-.stack-layout__box { flex: 1 1 340px; max-width: var(--max-width-tight); }
-/* Essa imagem é uma peça publicitária cheia de texto (preço, nomes,
-   benefícios) — legível no desktop, ilegível reduzida a ~350px. No mobile,
-   o HTML do stack-box já explica tudo com clareza; a imagem some e volta
-   a aparecer como reforço visual a partir do tablet. */
-.stack-layout__art { display: none; }
-@media (min-width: 720px) {
-  .stack-layout__art { display: block; flex: 1 1 300px; max-width: 420px; }
-  .stack-layout__art img {
-    width: 100%;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-card);
-  }
-}
-.stack-box {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: clamp(18px, 4vw, 28px);
-}
-.stack-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border-soft); font-size: 15px; }
-.stack-row:last-of-type { border-bottom: none; }
-.stack-row__thumb { width: 34px; height: 34px; border-radius: 6px; object-fit: cover; object-position: top; border: 1px solid var(--border); flex-shrink: 0; }
-.stack-row__label { flex: 1; }
-.stack-row__value { font-weight: 600; }
-.stack-total { display: flex; flex-wrap: wrap; gap: 6px 12px; justify-content: space-between; align-items: baseline; padding: 16px 0 0; font-size: 15.5px; font-weight: 600; }
-.stack-total__value { color: var(--wine); font-size: 20px; font-weight: 700; }
-.stack-transition {
-  text-align: center;
+/* ---- Objeção "cifra grátis" (V2, antes dos Planos) ---- */
+.objection-section { text-align: center; }
+.objection-eyebrow { text-align: center; }
+.objection-title {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: clamp(20px, 3vw, 26px);
-  margin: 32px 0 0;
+  font-size: clamp(21px, 3vw, 27px);
+  line-height: 1.3;
+  margin: 0 0 14px;
 }
+.objection-body { margin: 0 auto; font-size: 15.5px; line-height: 1.65; color: var(--text-muted); max-width: 60ch; }
+
+/* ---- Autoria (V2, dentro da Nota Invisível) ---- */
+.author-card {
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(246, 242, 233, 0.06);
+  border: 1px solid var(--dark-line);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  text-align: left;
+}
+.author-card__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--dark);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.author-card__name { margin: 0; font-weight: 700; font-size: 14.5px; color: var(--on-dark); }
+.author-card__bio { margin: 2px 0 0; font-size: 13px; line-height: 1.5; color: var(--on-dark-muted); }
+
+/* ---- Tudo que você recebe (V2 — bônus + stack unificados) ---- */
+.value-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 22px; }
+@media (min-width: 560px) { .value-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 920px) { .value-grid { grid-template-columns: repeat(3, 1fr); } }
+.value-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+}
+.value-card__thumb { width: 52px; height: 52px; border-radius: 8px; overflow: hidden; flex-shrink: 0; border: 1px solid var(--border); background: var(--bg); }
+.value-card__thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.value-card__body { flex: 1; min-width: 0; }
+.value-card__tag { margin: 0 0 3px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--wine); }
+.value-card__name { margin: 0 0 3px; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; line-height: 1.3; }
+.value-card__check { width: 14px; height: 14px; color: var(--primary); flex-shrink: 0; }
+.value-card__benefit { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--text-muted); }
+.value-card__value { font-weight: 700; font-size: 13.5px; color: var(--wine); white-space: nowrap; flex-shrink: 0; }
+
+.value-total-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  max-width: var(--max-width-tight);
+  margin: 0 auto;
+}
+.value-total { display: flex; flex-wrap: wrap; gap: 6px 12px; justify-content: space-between; align-items: baseline; font-size: 15.5px; font-weight: 600; }
+.value-total__amount { color: var(--wine); font-size: 20px; font-weight: 700; }
 
 /* ---- Planos ---- */
 /* Mobile: forced single column, Básico then Completo — never side by side,
@@ -1074,8 +1057,6 @@ h2.section-title {
    labels, not body copy, at any screen size. */
 @media (max-width: 640px) {
   .feature-row__benefit,
-  .bonus-card__what,
-  .bonus-card__benefit,
   .faq-answer,
   .dor-list__desc,
   .value-note p {

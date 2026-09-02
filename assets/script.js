@@ -64,21 +64,17 @@ const FEATURES = [
   { label: 'Cifrário direto e objetivo, sem letra impressa', benefit: 'Organizado para consulta rápida durante ensaios e cultos. No Plano Completo, você também recebe à parte o Cifrário com Letras Completas, para acompanhar a música do início ao fim.' }
 ];
 
-const BONUSES = [
-  { title: 'Guia dos Padrões', value: 'R$47', img: 'mockup-guia-padroes.webp', what: 'Guia de 6 páginas ensinando a reconhecer as progressões de acordes mais comuns do louvor.', benefit: 'você sabe o que fazer nos primeiros segundos em que a música muda, em vez de travar.', objection: 'Só ter cifra organizada não resolve, eu travo mesmo assim.' },
-  { title: 'Guia de Transposição', value: 'R$37', img: 'mockup-guia-transposicao.webp', what: 'Guia com tabela de capotraste e método pra tocar em qualquer tom.', benefit: 'quando a líder canta num tom diferente do que você estudou, você sabe reposicionar.', objection: 'E se o tom da minha igreja for outro?' },
-  { title: 'Checklists do Altar', value: 'R$27', img: 'mockup-checklist-altar.webp', what: '3 fichas de bolso — antes do ensaio, antes do culto, e emergência (se mudarem a música).', benefit: 'você tem um roteiro rápido de preparo, em vez de confiar só na memória.', objection: 'Eu esqueço de me preparar direito.' },
-  { title: 'Cifrário Imprimível', value: 'R$27', img: 'mockup-cifrario-imprimivel.webp', what: 'As 100 cifras num arquivo separado, formatado só pra impressão — sem os guias.', benefit: 'você leva impresso pro culto, sem depender de celular ligado o tempo todo.', objection: 'Eu preciso de tela ligada o culto inteiro?' },
-  { title: 'Cifrário com Letras Completas', value: 'R$37', img: 'mockup-cifrario-letras.webp', what: 'As músicas em formato tradicional, com letra completa e acordes posicionados ao longo da música, para você acompanhar cada trecho do início ao fim.', benefit: 'tenha também uma versão familiar da cifra para consultar quando precisar acompanhar a música inteira.', objection: 'Só o formato de cifra separada não me ajuda a cantar a letra toda.' }
-];
-
-const STACK_ITEMS = [
-  { label: 'Cifrário completo (100 músicas)', value: 'R$67', img: 'cifra-01-thumb.webp' },
-  { label: 'Guia dos Padrões', value: 'R$47', img: 'mockup-guia-padroes.webp' },
-  { label: 'Guia de Transposição', value: 'R$37', img: 'mockup-guia-transposicao.webp' },
-  { label: 'Checklists do Altar', value: 'R$27', img: 'mockup-checklist-altar.webp' },
-  { label: 'Cifrário Imprimível', value: 'R$27', img: 'mockup-cifrario-imprimivel.webp' },
-  { label: 'Cifrário com Letras Completas', value: 'R$37', img: 'mockup-cifrario-letras.webp' }
+/* Bônus + Stack de valor unificados (V2) — cada item já existia antes,
+   separado em duas listas repetidas (BONUSES e STACK_ITEMS). "benefit" aqui
+   é uma versão condensada do "what"/"benefit" que já existia em cada bônus —
+   nenhum valor, nome ou bônus novo foi criado. */
+const VALUE_ITEMS = [
+  { label: 'Cifrário completo — 100 músicas', value: 'R$67', img: 'cifra-01-thumb.webp', tag: 'Nos dois planos', benefit: '100 cifras organizadas por momento do culto.' },
+  { label: 'Guia dos Padrões', value: 'R$47', img: 'mockup-guia-padroes.webp', tag: 'Bônus — Plano Completo', benefit: 'Reconheça as progressões de acordes mais comuns do louvor.' },
+  { label: 'Guia de Transposição', value: 'R$37', img: 'mockup-guia-transposicao.webp', tag: 'Bônus — Plano Completo', benefit: 'Tabela de capotraste pra tocar em qualquer tom.' },
+  { label: 'Checklists do Altar', value: 'R$27', img: 'mockup-checklist-altar.webp', tag: 'Bônus — Plano Completo', benefit: '3 fichas de preparo rápido, inclusive de emergência.' },
+  { label: 'Cifrário Imprimível', value: 'R$27', img: 'mockup-cifrario-imprimivel.webp', tag: 'Bônus — Plano Completo', benefit: 'As 100 cifras formatadas só pra impressão.' },
+  { label: 'Cifrário com Letras Completas', value: 'R$37', img: 'mockup-cifrario-letras.webp', tag: 'Bônus — Plano Completo', benefit: 'Letra completa com acordes posicionados, do início ao fim.' }
 ];
 
 /* As respostas de reembolso e de visibilidade da lista de músicas usam
@@ -157,32 +153,20 @@ function renderFeatures() {
   });
 }
 
-function renderBonuses() {
-  const grid = document.getElementById('bonusGrid');
-  BONUSES.forEach((b) => {
-    const card = el('div', 'bonus-card');
+function renderValueGrid() {
+  const grid = document.getElementById('valueGrid');
+  VALUE_ITEMS.forEach((v) => {
+    const card = el('div', 'value-card');
     card.innerHTML = `
-      <div class="bonus-card__img-wrap"><img src="${IMG}${b.img}" alt="Mockup do material ${b.title}" loading="lazy" width="900" height="600"></div>
-      <div class="bonus-card__body">
-        <div class="bonus-card__head">
-          <p class="bonus-card__title">${b.title}</p>
-          <span class="bonus-card__value">Valor: ${b.value}</span>
-        </div>
-        <p class="bonus-card__what">${b.what}</p>
-        <p class="bonus-card__benefit"><strong>Benefício:</strong> ${b.benefit}</p>
-        <p class="bonus-card__objection">"${b.objection}"</p>
+      <div class="value-card__thumb"><img src="${IMG}${v.img}" alt="" loading="lazy" width="120" height="120"></div>
+      <div class="value-card__body">
+        <p class="value-card__tag">${v.tag}</p>
+        <p class="value-card__name"><svg class="value-card__check" aria-hidden="true"><use href="#icon-check"></use></svg>${v.label}</p>
+        <p class="value-card__benefit">${v.benefit}</p>
       </div>
+      <span class="value-card__value">${v.value}</span>
     `;
     grid.appendChild(card);
-  });
-}
-
-function renderStack() {
-  const box = document.getElementById('stackList');
-  STACK_ITEMS.forEach((s) => {
-    const row = el('div', 'stack-row');
-    row.innerHTML = `<img class="stack-row__thumb" src="${IMG}${s.img}" alt="" loading="lazy"><span class="stack-row__label">${s.label}</span><span class="stack-row__value">${s.value}</span>`;
-    box.appendChild(row);
   });
 }
 
@@ -358,8 +342,7 @@ function safe(fn) {
 document.addEventListener('DOMContentLoaded', () => {
   safe(renderDor);
   safe(renderFeatures);
-  safe(renderBonuses);
-  safe(renderStack);
+  safe(renderValueGrid);
   safe(renderFaqs);
   safe(renderSongsModal);
   safe(renderPreviewGrid);
