@@ -33,6 +33,53 @@ function trackEvent(name, payload) {
 }
 
 /* ==========================================================================
+   Repasse de UTM/tracking — landing → checkout Kiwify.
+   Sem isso, os links de checkout eram fixos (CONFIG.CHECKOUT_URLS) e
+   qualquer utm_source/utm_medium/etc. da URL da landing (ex.: vindo do
+   anúncio) se perdia ao clicar em "Quero o Plano X" — por isso a Kiwify
+   nunca via essas UTMs. Reescreve o próprio atributo href de cada CTA de
+   checkout logo no carregamento (não só o clique), pra também funcionar
+   em "abrir em nova guia"/"copiar link" e em toques longos no mobile.
+   Nunca sobrescreve um parâmetro que já exista no link de destino, e não
+   inventa nenhum valor — só repassa o que já veio na URL de entrada. */
+const FORWARDABLE_PARAMS = [
+  'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+  'src', 'sck', 's1', 's2', 's3'
+];
+
+function getForwardableParams() {
+  const incoming = new URLSearchParams(window.location.search);
+  const out = new URLSearchParams();
+  FORWARDABLE_PARAMS.forEach((key) => {
+    const value = incoming.get(key);
+    if (value) out.set(key, value);
+  });
+  return out;
+}
+
+function appendForwardParams(url, forwardParams) {
+  try {
+    const target = new URL(url);
+    forwardParams.forEach((value, key) => {
+      if (!target.searchParams.has(key)) target.searchParams.set(key, value);
+    });
+    return target.toString();
+  } catch (err) {
+    return url;
+  }
+}
+
+function setupCheckoutTracking() {
+  const forwardParams = getForwardableParams();
+  if (![...forwardParams.keys()].length) return;
+  document.querySelectorAll('[data-cta]').forEach((btn) => {
+    const base = CONFIG.CHECKOUT_URLS[btn.dataset.cta];
+    if (!base || base.indexOf('CHECKOUT_') === 0) return;
+    btn.href = appendForwardParams(base, forwardParams);
+  });
+}
+
+/* ==========================================================================
    Conteúdo — fonte única para as listas renderizadas dinamicamente.
    Copy aprovada; não alterar preço, bônus, garantia ou promessa aqui.
    Todas as imagens em assets/img/ são páginas reais extraídas dos PDFs
@@ -306,12 +353,16 @@ function showToast(message) {
 
 function handleCta(e, plan) {
   e.preventDefault();
-  const url = CONFIG.CHECKOUT_URLS[plan];
+  const base = CONFIG.CHECKOUT_URLS[plan];
   trackEvent(plan === 'basico' ? 'ClickCTABasico' : 'ClickCTACompleto');
-  if (!url || url.indexOf('CHECKOUT_') === 0) {
+  if (!base || base.indexOf('CHECKOUT_') === 0) {
     showToast('Link de checkout ainda não configurado — defina CONFIG.CHECKOUT_URLS.' + plan + ' em assets/script.js.');
     return;
   }
+  // getAttribute, não e.currentTarget.href: se setupCheckoutTracking() já
+  // reescreveu o link com as UTMs da landing, é esse valor que precisa ser
+  // usado; se não havia nada pra repassar, cai de volta no link fixo.
+  const url = e.currentTarget.getAttribute('href') || base;
   window.location.href = url;
 }
 
@@ -340,6 +391,7 @@ function safe(fn) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  safe(setupCheckoutTracking);
   safe(renderDor);
   safe(renderFeatures);
   safe(renderValueGrid);
